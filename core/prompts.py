@@ -5,42 +5,52 @@ def research_prompt(persona_prompt, company, information):
 
 You are an expert business research analyst.
 
-Generate a professional company research report using the information below.
+Generate a detailed and professional company research report.
 
 Company: {company}
 
 Information Sources:
 {information}
 
-Provide the analysis using the following structure:
+Instructions:
+- Be analytical, not just descriptive
+- Use bullet points where possible
+- Avoid vague statements
+- Focus on insights and reasoning
+
+Structure your response clearly:
 
 1. Company Overview
 - Brief history
-- Mission and business focus
+- Mission and core business focus
 
 2. Products and Services
-- Main offerings
-- Key technologies
+- Key offerings
+- Important technologies or innovations
 
 3. Market Position
-- Industry role
+- Industry standing
 - Competitive advantages
 
 4. Competitors
-- Major companies competing in this market
+- Major competitors
+- How this company compares
 
 5. Recent Developments
-- News, partnerships, product launches
+- Product launches
+- Partnerships
+- Strategic moves
 
 6. Opportunities
-- Potential growth areas
+- Growth areas
+- Market trends benefiting the company
 
 7. Strategic Account Plan
 - Business opportunities
 - Potential partnerships
 - Strategic recommendations
 
-Write clearly and professionally.
+Make the output structured, clear, and insightful.
 """
 
 def comparison_prompt(company1, company2, info1, info2):
@@ -48,7 +58,7 @@ def comparison_prompt(company1, company2, info1, info2):
     return f"""
 You are a strategic business analyst.
 
-Compare the following two companies.
+Compare the following two companies in a clear and analytical way.
 
 Company 1: {company1}
 Information:
@@ -58,7 +68,12 @@ Company 2: {company2}
 Information:
 {info2}
 
-Provide a structured comparison:
+Instructions:
+- Highlight differences clearly
+- Use bullet points
+- Focus on insights, not repetition
+
+Structure:
 
 1. Company Overview
 2. Key Products and Technologies
@@ -67,5 +82,5 @@ Provide a structured comparison:
 5. Growth Opportunities
 6. Strategic Insights
 
-Be clear and analytical.
+Make the comparison concise, structured, and insightful.
 """

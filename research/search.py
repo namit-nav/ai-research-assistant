@@ -5,7 +5,7 @@ import urllib.parse
 
 def search_company(company):
 
-    query = company + " company"
+    query = urllib.parse.quote(company + " company overview products revenue competitors")
 
     url = f"https://duckduckgo.com/html/?q={query}"
 
@@ -13,33 +13,37 @@ def search_company(company):
         "User-Agent": "Mozilla/5.0"
     }
 
-    response = requests.get(url, headers=headers)
-
-    soup = BeautifulSoup(response.text, "html.parser")
-
     links = []
 
-    results = soup.find_all("a", class_="result__a")
+    try:
+        response = requests.get(url, headers=headers, timeout=10)
 
-    for r in results:
+        if response.status_code != 200:
+            return []
 
-        link = r.get("href")
+        soup = BeautifulSoup(response.text, "html.parser")
 
-        if "uddg=" in link:
+        results = soup.find_all("a", class_="result__a")
 
-            real_url = link.split("uddg=")[1]
-            real_url = urllib.parse.unquote(real_url)
+        for r in results:
+            link = r.get("href")
 
-            links.append(real_url)
+            if not link:
+                continue
 
-    return links[:5]
+            if "uddg=" in link:
+                real_url = link.split("uddg=")[1]
+                real_url = urllib.parse.unquote(real_url)
 
+                # Remove tracking junk (&rut=...)
+                real_url = real_url.split("&")[0]
 
-if __name__ == "__main__":
+                links.append(real_url)
 
-    company = "Nvidia"
+        # Remove duplicates
+        links = list(set(links))
 
-    results = search_company(company)
+        return links[:5]
 
-    for r in results:
-        print(r)
+    except Exception:
+        return []

@@ -8,7 +8,15 @@ def add_to_memory(role, content):
         "content": content
     })
 
+    # Limit memory size (keep last 10 messages)
+    if len(conversation_memory) > 10:
+        conversation_memory.pop(0)
+
 
 def get_memory():
 
     return conversation_memory
+
+
+def clear_memory():
+    conversation_memory.clear()

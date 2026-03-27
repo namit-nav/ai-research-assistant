@@ -8,24 +8,32 @@ def scrape_page(url):
         "User-Agent": "Mozilla/5.0"
     }
 
-    response = requests.get(url, headers=headers)
+    try:
+        response = requests.get(url, headers=headers, timeout=10)
 
-    soup = BeautifulSoup(response.text, "html.parser")
+        if response.status_code != 200:
+            return ""
 
-    paragraphs = soup.find_all("p")
+        soup = BeautifulSoup(response.text, "html.parser")
 
-    text = ""
+        paragraphs = soup.find_all("p")
 
-    for p in paragraphs:
-        text += p.get_text() + "\n"
+        text = ""
 
-    return text
+        for p in paragraphs:
+            content = p.get_text().strip()
 
+            # Skip very short or useless lines
+            if len(content) < 40:
+                continue
 
-if __name__ == "__main__":
+            text += content + "\n"
 
-    url = "https://en.wikipedia.org/wiki/Nvidia"
+            # Limit total size (important)
+            if len(text) > 5000:
+                break
 
-    content = scrape_page(url)
+        return text
 
-    print(content[:2000])
+    except Exception:
+        return ""
