@@ -69,9 +69,11 @@ Information:
 {info2}
 
 Instructions:
-- Highlight differences clearly
-- Use bullet points
-- Focus on insights, not repetition
+- Highlight key differences clearly
+- Explain WHY the companies differ
+- Compare business models and strategies
+- Provide deeper insights, not just descriptions
+- Use bullet points where possible
 
 Structure:
 
@@ -81,6 +83,9 @@ Structure:
 4. Competitive Advantages
 5. Growth Opportunities
 6. Strategic Insights
+- Key differences between the companies
+- Which company is better positioned for future growth and why
+- Risks and limitations of each company
 
 Make the comparison concise, structured, and insightful.
 """

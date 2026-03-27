@@ -43,7 +43,7 @@ def search_company(company):
         # Remove duplicates
         links = list(set(links))
 
-        return links[:5]
+        return links[:4]
 
     except Exception:
         return []
